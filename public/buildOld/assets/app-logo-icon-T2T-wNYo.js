@@ -1,0 +1,1 @@
+import{j as o}from"./app-B9AQd5ys.js";function t(n){return o.jsx(o.Fragment,{children:o.jsx("img",{src:"/icon512_maskable.png",alt:"Application Logo",className:"h-full w-full object-contain"})})}export{t as A};

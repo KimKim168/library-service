@@ -1,0 +1,1 @@
+import{j as s}from"./app-B9AQd5ys.js";import{L as o}from"./label-C0F9iVr4.js";import{u as m}from"./use-translation-Bes2uPNF.js";const x=({id:t,label:r,required:a=!1})=>{const{t:e}=m();return s.jsxs(o,{htmlFor:t,className:"text-start",children:[e(r),a&&s.jsx("span",{className:"text-red-400",children:"*"})]})};export{x as F};

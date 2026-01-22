@@ -1,0 +1,6 @@
+import{c as l}from"./createLucideIcon-CEUCJa7Y.js";import{j as e,b as n}from"./app-B9AQd5ys.js";import{B as s}from"./button-EpALpkJz.js";import{u as t}from"./use-translation-Bes2uPNF.js";/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const c=[["path",{d:"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8",key:"5wwlr5"}],["path",{d:"M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",key:"1d0kgt"}]],m=l("House",c),f=()=>{const{currentLocale:a}=t(),r=o=>{n.visit(`/lang/${o}`,{preserveState:!1,preserveScroll:!1,replace:!0,onSuccess:()=>{window.location.reload()}})};return e.jsxs(e.Fragment,{children:[e.jsx(s,{size:"icon",variant:"outline",onClick:()=>r("kh"),className:`object-coverfull overflow-hidden dark:border-white ${a==="kh"&&"ring-2 ring-primary"}`,children:e.jsx("img",{className:"h-full w-full object-cover",src:"/assets/icons/flags/kh.png",alt:"KH Flag"})}),e.jsx(s,{size:"icon",variant:"outline",onClick:()=>r("en"),className:`object-coverfull overflow-hidden dark:border-white ${a==="en"&&"ring-2 ring-primary"}`,children:e.jsx("img",{className:"h-full w-full object-cover",src:"/assets/icons/flags/uk.png",alt:"UK Flag"})})]})};export{m as H,f as N};
