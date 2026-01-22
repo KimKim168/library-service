@@ -1,1 +1,0 @@
-import{j as r}from"./app-B9AQd5ys.js";/* empty css            */const a=({category:t})=>r.jsx("button",{className:" text-[#104674] dark:text-white  font-bold text-xl border-b-[#104674] dark:border-b-white border-b-2 ",children:t});export{a as default};
