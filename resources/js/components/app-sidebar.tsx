@@ -89,6 +89,25 @@ const mainNavItems: {
         ],
     },
     {
+        title: 'Videos',
+        url: '/admin/videos',
+        icon: LayoutList,
+        activeList: ['/admin/videos', '/admin/video-categories'],
+        permission: 'video view',
+        items: [
+            {
+                title: 'All Videos',
+                url: '/admin/videos',
+                permission: 'video view',
+            },
+            {
+                title: 'Categories',
+                url: '/admin/video-categories',
+                permission: 'video_category view',
+            },
+        ],
+    },
+    {
         title: 'Posts',
         url: '/admin/posts',
         icon: FilesIcon,

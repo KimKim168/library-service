@@ -17,7 +17,9 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\TypeGroupController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\VideoCategoryController;
 use App\Http\Controllers\Admin\WebsiteInfoController;
+use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -114,6 +116,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('admin/items/{item}/update', [ItemController::class, 'update']);
     Route::post('admin/items/{id}/recover', [ItemController::class, 'recover']);
 
+    // Video Category
+    Route::resource('admin/video-categories', VideoCategoryController::class);
+    Route::post('admin/video-categories/{video_category}/update', [VideoCategoryController::class, 'update']);
+    Route::post('admin/video-categories/{id}/recover', [VideoCategoryController::class, 'recover']);
+
+    // Video
+    Route::resource('admin/videos', VideoController::class);
+    Route::delete('admin/videos/images/{image}', [VideoController::class, 'destroy_image']);
+    Route::delete('admin/videos/files/{file}', [VideoController::class, 'destroy_file']);
+    Route::post('admin/videos/{video}/update', [VideoController::class, 'update']);
+    Route::post('admin/videos/{id}/recover', [VideoController::class, 'recover']);
 
     // Library Data
     Route::get('register-library', [LibraryDataRegisterController::class, 'register']);

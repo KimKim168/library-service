@@ -111,7 +111,7 @@ const videos = [
 
 const VideoSessions = () => {
     return (
-        <section id="video" className="bg-[linear-gradient(138deg,#f5f5ff,#f5f4ff,#f6f4ff,#f6f3ff,#f7f3ff,#f7f2ff,#f7f1ff,#f8f1ff,#f8f0ff)] py-8">
+        <section id="video" className="bg-gray-50 py-8">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="mb-6 text-center text-3xl font-bold text-gray-900 sm:text-4xl">Video Reference Sessions</h2>
 

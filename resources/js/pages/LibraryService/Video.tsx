@@ -115,12 +115,6 @@ const Video = () => {
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-7xl">
                         <div className="mb-4">
-                            {/* <a href="/" className="inline-flex items-center font-medium text-indigo-600 transition-colors hover:text-indigo-700">
-                                <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                                </svg>
-                                Back to Videos
-                            </a> */}
                             <Breadcrumb className="inline-block rounded-2xl  p-1 backdrop-blur dark:bg-slate-800/60">
                                 <BreadcrumbList>
                                     <BreadcrumbItem>
@@ -144,7 +138,7 @@ const Video = () => {
                         <div className="items-start lg:grid lg:grid-cols-3 lg:gap-8">
                             {/* Main Video Area */}
                             <div className="mb-8 lg:col-span-2 lg:mb-0">
-                                <div className="mb-6 aspect-video w-full overflow-hidden rounded-3xl">
+                                <div className="mb-6 aspect-video w-full overflow-hidden rounded-xl">
                                     <HeroVideo
                                         thumbnail="https://i.ytimg.com/vi/rkpzYNB6xks/hq720.jpg"
                                         videoUrl="https://www.youtube.com/embed/rkpzYNB6xks"
@@ -181,7 +175,7 @@ const Video = () => {
                                             <p className='text-sm'>{videos?.length} videos</p>
                                         </div>
                                     </div>
-                                    <div className="mt-4 max-h-[361px] space-y-4 overflow-y-auto px-4">
+                                    <div className="mt-4 max-h-[337px] space-y-4 overflow-y-auto px-4 pb-4">
                                         {videos.map((video) => (
                                             <a key={video.id} href={video.link} className="group flex cursor-pointer gap-3">
                                                 <div className="aspect-video w-32 flex-shrink-0 overflow-hidden rounded bg-gradient-to-br from-indigo-100 to-purple-100">

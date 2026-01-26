@@ -35,6 +35,10 @@ class Type extends Model
     {
         return $this->hasMany(Item::class, 'file_type_code', 'code');
     }
+    public function file_type_videos()
+    {
+        return $this->hasMany(Video::class, 'file_type_code', 'code');
+    }
     public function annual_budget_libraries()
     {
         return $this->hasMany(LibraryData::class, 'annual_budget_type_code', 'code');
