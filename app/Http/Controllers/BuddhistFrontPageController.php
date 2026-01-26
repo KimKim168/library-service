@@ -18,9 +18,7 @@ use Inertia\Inertia;
 
 class BuddhistFrontPageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $categoryWithPostsData = PostCategory::with(['posts' => function ($query) {
@@ -68,7 +66,7 @@ class BuddhistFrontPageController extends Controller
         $columns = array_diff($columns, ['long_description']); // remove 'about' column
         $query->select($columns);
 
-        if ($value = $request->input('status')) {
+        if ($value = $request->input(key: 'status')) {
             $query->where('status', $value);
         }
         // End Exclude

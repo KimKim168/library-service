@@ -237,7 +237,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             description="Lower number has higher priority."
                         />
 
-                        {/* {types?.length > 0 && (
+                        {types?.length > 0 && (
                             <FormCombobox
                                 name="type_code"
                                 label="Type"
@@ -249,7 +249,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 onChange={(val) => setData('type_code', val)}
                                 error={errors.type_code}
                             />
-                        )} */}
+                        )}
 
                         <FormField
                             id="button_title"

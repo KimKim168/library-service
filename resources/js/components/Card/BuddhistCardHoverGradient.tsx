@@ -4,48 +4,41 @@ import { ChevronRightIcon } from 'lucide-react';
 import { styled } from 'styled-components';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import HtmlContentDisplay from '../Typography/HtmlContentDisplay';
 
 const BuddhistCardHoverGradient = ({ item }: { item?: any }) => {
-    
-    
     const { t, currentLocale } = useTranslation();
     return (
         <StyledWrapper>
-            <Link href={`/posts/${item.id}`}>
-                <div className="card group h-auto max-h-[450px] w-full cursor-pointer">
+            <Link href={`/videos/${item.id}`}>
+                <div className="card group h-full max-h-[450px] w-full cursor-pointer">
                     <div className="card__glow" />
-                    <div className="card__content">
+                    <div className="card__content h-auto">
                         {/* {badgeText && <div className="card__badge">{badgeText}</div>} */}
                         <Avatar className="card__image aspect-video size-auto w-full border border-muted">
                             <AvatarImage
                                 className="aspect-video w-full rounded-none object-cover"
-                                src={`/images/thumb/${item.thumbnail}`}
-                                alt={currentLocale === 'kh' ? item?.title_kh || item?.title : item?.title}
+                                src={`/assets/images/videos/thumb/${item?.thumbnail}`}
+                                alt={currentLocale === 'kh' ? item?.name_kh || item?.name : item?.name}
                             />
-                            <AvatarFallback className="aspect-video w-full rounded-none bg-[#961c1e]/10">
-                                {/* <ImageOff className="size-10 text-primary opacity-30" /> */}
+                            {/* <AvatarFallback className="aspect-video w-full rounded-none bg-[#961c1e]/10">
+                                <ImageOff className="size-10 text-primary opacity-30" />
                                 <img src="/assets/buddhist/logo.webp" alt="Logo" className="w-20 dark:hidden" />
                                 <img src="/assets/buddhist/colored-logo.png" alt="Logo" className="hidden w-20 dark:block" />
-                            </AvatarFallback>
+                            </AvatarFallback> */}
                         </Avatar>
 
-                        <div className="flex flex-1 flex-col justify-between">
+                        <div className="flex h-full flex-1 flex-col justify-between">
                             <div className="card__text">
-                                <p className="card__title pb-2 text-lg font-medium">
-                                    {currentLocale === 'kh' ? item?.title_kh || item?.title : item?.title}
+                                <p className="card__title line-clamp-2 pb-1 text-lg font-medium">
+                                    {currentLocale === 'kh' ? item?.name_kh || item?.name : item?.name}
                                 </p>
-                                <p className="text-muted">
-                                    <HtmlContentDisplay
-                                        className="line-clamp-4 prose-p:!m-0 prose-p:!text-start prose-p:text-muted-foreground"
-                                        isRemoveImage={true}
-                                        isRemoveAllStyles={true}
-                                        isRemoveAllEmptyTags={true}
-                                        content={
-                                            currentLocale === 'kh' ? item?.short_description_kh || item?.short_description : item?.short_description
-                                        }
-                                    />
-                                </p>
+                                <div
+                                    className="line-clamp-3 text-base text-gray-600"
+                                    dangerouslySetInnerHTML={{
+                                        __html:
+                                            currentLocale === 'kh' ? item?.short_description_kh || item?.short_description : item?.short_description,
+                                    }}
+                                />
                             </div>
                         </div>
 
@@ -78,7 +71,7 @@ const StyledWrapper = styled.div`
         overflow: hidden;
         transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         // box-shadow: var(--card-shadow);
-        border: 1px solid rgba(255, 255, 255, 0.0);
+        border: 1px solid rgba(255, 255, 255, 0);
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     }
 
