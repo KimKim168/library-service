@@ -127,7 +127,7 @@ const Video = () => {
                                             <Link
                                                 key={video.id}
                                                 href={`/videos/${video.id}`}
-                                                className={`group flex cursor-pointer gap-3 px-4 py-2 ${showVideoData.id == video.id ? 'bg-primary/10 text-indigo-600' : 'text-gray-900'}`}
+                                                className={`group flex cursor-pointer gap-3 px-4 py-2 ${showVideoData.id == video.id ? 'bg-primary/10 text-indigo-600 ' : 'text-gray-900'}`}
                                             >
                                                 <div className="aspect-video w-32 flex-shrink-0 overflow-hidden rounded bg-gradient-to-br from-indigo-100 to-purple-100">
                                                     <img
