@@ -15,14 +15,16 @@ class LibraryServiceFrontPageController extends Controller
 
     public function index()
     {
-        $videoHeader = Page::where('code','content-header-home-top')->first();
-        $videoHeaderBottom = Page::where('code','content-header-home-bottom')->first();
+        $videoHeader = Page::where('code', 'content-header-home-top')->first();
+        $videoHeaderBottom = Page::where('code', 'content-header-home-bottom')->first();
         $heroVideo = Video::where('category_code', 'hero-video')
             ->where('status', 'published')
+            ->with('files')
             ->first();
 
         // All videos (published only)
         $allVideos = Video::where('status', 'published')
+            ->with('files')
             ->orderBy('id', 'desc')
             ->get();
 
@@ -62,13 +64,17 @@ class LibraryServiceFrontPageController extends Controller
     {
         $query = Video::query();
 
-        $showVideoData = Video::find($id);
+        $showVideoData = Video::with('files')->find($id);
+
         $relatedVideoData = (clone $query)
             ->where('status', 'published')
+            ->with('files')
             ->where('category_code', $showVideoData->category_code)
-            ->inRandomOrder()
             ->get();
-        // return ($relatedVideoData);    
+
+        $showVideoData->increment('total_view_count');
+        
+        // return ($showVideoData);    
         return Inertia::render('LibraryService/Video', [
             'showVideoData' => $showVideoData,
             'relatedVideoData' => $relatedVideoData,
@@ -81,7 +87,6 @@ class LibraryServiceFrontPageController extends Controller
         $relatedData = (clone $query)
             ->where('status', operator: 'published')
             ->where('category_code', $showData->category_code)
-            ->inRandomOrder()
             ->get();
 
         // return ($relatedData);

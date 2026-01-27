@@ -53,7 +53,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
         type: 'message',
     });
 
-    const { fileTypes, languages, categories, publishers, authors } = usePage<any>().props;
+    const { fileTypes, categories } = usePage<any>().props;
 
     const [inputLanguage, setInputLanguage] = useState<'default' | 'khmer'>('default');
 
@@ -64,7 +64,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
     const { data, setData, post, processing, transform, progress, errors, reset } = useForm<ItemForm>({
         code: editData?.code || '',
         category_code: editData?.category_code || null,
-        file_type_code: editData?.file_type_code || '',
+        file_type_code: editData?.file_type_code || fileTypes[0]?.code || '',
         status: editData?.status || postStatusData[0]?.value || '',
         name: editData?.name || '',
         name_kh: editData?.name_kh || '',
@@ -252,14 +252,14 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                     <>
                         <div>
                             <Tabs defaultValue="thumbnail" className="w-full rounded-lg bg-muted/80 p-4">
-                                <TabsList className="border bg-border/50 p-1 dark:border-white/20">
+                                {/* <TabsList className="border bg-border/50 p-1 dark:border-white/20">
                                     <TabsTrigger value="thumbnail" className="h-full dark:data-[state=active]:bg-white/20">
                                         {t('Thumbnail')}
                                     </TabsTrigger>
                                     <TabsTrigger value="images" className="h-full dark:data-[state=active]:bg-white/20">
                                         {t('Images')}
                                     </TabsTrigger>
-                                </TabsList>
+                                </TabsList> */}
                                 <TabsContent value="thumbnail">
                                     <div className={cn('form-field-container', !editData?.thumbnail && 'md:grid-cols-1')}>
                                         <FormFileUpload
@@ -322,10 +322,10 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                         name="file_type_code"
                                         label="File Type"
                                         options={[
-                                            {
-                                                value: null,
-                                                label: t('NA'),
-                                            },
+                                            // {
+                                            //     value: null,
+                                            //     label: t('NA'),
+                                            // },
                                             ...fileTypes.map((item: any) => ({
                                                 value: item.code,
                                                 label: currentLocale == 'kh' ? item.name_kh || item.name : item.name,
@@ -364,7 +364,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 <UploadedFile
                                     fileClassName="bg-background"
                                     label="Uploaded Files"
-                                    permission="item update"
+                                    permission="video update"
                                     files={editData?.files}
                                     deletePath="/admin/videos/files/"
                                     basePath="/assets/files/videos/"

@@ -198,7 +198,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 description="Select the category where this item belongs to."
                             />
                         )}
-                        {types?.length > 0 && (
+                        {/* {types?.length > 0 && (
                             <FormCombobox
                                 name="type_code"
                                 label="Type"
@@ -210,7 +210,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 onChange={(val) => setData('type_code', val)}
                                 error={errors.type_code}
                             />
-                        )}
+                        )} */}
                         {postStatusData?.length > 0 && (
                             <FormCombobox
                                 name="status"
@@ -224,7 +224,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 error={errors.status}
                             />
                         )}
-                        {languages?.length > 0 && (
+                        {/* {languages?.length > 0 && (
                             <FormCombobox
                                 name="language_code"
                                 label="Language"
@@ -236,7 +236,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 onChange={(val) => setData('language_code', val)}
                                 error={errors.language_code}
                             />
-                        )}
+                        )} 
                         <FormField
                             containerClassName="col-span-2"
                             id="external_link"
@@ -256,6 +256,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             error={errors.keywords}
                             description="Help users find your content more easily. Example: <b>election, candidates, political debate</b>"
                         />
+                        */}
                     </div>
                 )}
 
@@ -277,14 +278,14 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                     <>
                         <div>
                             <Tabs defaultValue="thumbnail" className="w-full rounded-lg bg-muted/80 p-4">
-                                <TabsList className="border bg-border/50 p-1 dark:border-white/20">
+                                {/* <TabsList className="border bg-border/50 p-1 dark:border-white/20">
                                     <TabsTrigger value="thumbnail" className="h-full dark:data-[state=active]:bg-white/20">
                                         {t('Thumbnail')}
                                     </TabsTrigger>
                                     <TabsTrigger value="images" className="h-full dark:data-[state=active]:bg-white/20">
                                         {t('Images')}
                                     </TabsTrigger>
-                                </TabsList>
+                                </TabsList> */}
                                 <TabsContent value="thumbnail">
                                     <div className={cn('form-field-container', !editData?.thumbnail && 'md:grid-cols-1')}>
                                         <FormFileUpload
@@ -339,7 +340,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             </Tabs>
                         </div>
 
-                        <div className="w-full rounded-lg bg-muted/80 p-4">
+                        {/* <div className="w-full rounded-lg bg-muted/80 p-4">
                             <FormFileUpload
                                 dropzoneOptions={{
                                     maxFiles: 100,
@@ -363,7 +364,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                     basePath="/assets/files/posts/"
                                 />
                             )}
-                        </div>
+                        </div> */}
                     </>
                 )}
 

@@ -1,11 +1,12 @@
 import { usePage } from '@inertiajs/react';
-import HeroVideo from './HeroVideo';
+import VideoFilePlayer from './VideoFilePlayer';
+import YouTubeEmbed from './YouTubeEmbed';
 
 const Hero = () => {
-    const { heroVideo} = usePage<any>().props;
+    const { heroVideo } = usePage<any>().props;
 
     return (
-        <section className=" pt-24 pb-16">
+        <section className="pt-24 pb-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-7xl">
                     <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -15,8 +16,10 @@ const Hero = () => {
                                 {heroVideo?.name} <span className="text-purple-600">{heroVideo?.short_description}</span>
                             </h1>
 
-                            <p className="mb-8 max-w-xl text-lg leading-relaxed text-gray-600 sm:text-xl" dangerouslySetInnerHTML={{__html:heroVideo?.long_description}}>
-                            </p>
+                            <p
+                                className="mb-8 max-w-xl text-lg leading-relaxed text-gray-600 sm:text-xl"
+                                dangerouslySetInnerHTML={{ __html: heroVideo?.long_description }}
+                            ></p>
 
                             {/* Call-to-Action Buttons */}
                             <div className="mb-10 flex flex-wrap gap-4">
@@ -28,11 +31,18 @@ const Hero = () => {
 
                         {/* Right Section: Image */}
                         <div className="relative">
-                            <div className="overflow-hidden aspect-[4/3] rounded-3xl shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
-                                <HeroVideo
-                                    thumbnail={`/assets/images/videos/thumb/${heroVideo?.thumbnail}`}
-                                    videoUrl={heroVideo?.external_link}
-                                />
+                            <div className="overflow-hidden rounded-3xl shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
+                                {heroVideo?.file_type_code === 'video-file' && (
+                                    <VideoFilePlayer
+                                        src={
+                                            heroVideo?.files?.[0]?.file_name ? `/assets/files/videos/${heroVideo.files[0].file_name}` : '' // empty string, nothing to play
+                                        }
+                                    />
+                                )}
+
+                                {heroVideo?.file_type_code === 'video-youtube-url' && heroVideo?.external_link && (
+                                    <YouTubeEmbed url={heroVideo.external_link} />
+                                )}
                             </div>
 
                             {/* Decorative Layer */}

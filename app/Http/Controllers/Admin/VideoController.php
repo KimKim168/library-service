@@ -56,7 +56,7 @@ class VideoController extends Controller implements HasMiddleware
         if ($category_code) {
             $query->where('category_code', $category_code);
         }
-        
+
         if ($status) {
             $query->where('status', $status);
         }
@@ -91,13 +91,10 @@ class VideoController extends Controller implements HasMiddleware
         return Inertia::render('Admin/Video/Index', [
             'tableData' => $tableData,
             'fileTypes' => Type::where('group_code', 'video-file-type-group')->withCount('file_type_videos')->orderBy('order_index')->orderBy('name')->get(),
-            'languages' => Language::orderBy('order_index')->withCount('items')->orderBy('name')->get(),
             'categories' => VideoCategory::orderBy('order_index')
                 ->withCount('videos')
                 ->orderBy('name')
                 ->get(),
-            'publishers' => User::orderBy('name')->withCount('publisher_items')->role('Publisher')->get(),
-            'authors' => User::orderBy('name')->withCount('author_items')->role('Author')->get(),
         ]);
     }
 
@@ -193,7 +190,7 @@ class VideoController extends Controller implements HasMiddleware
                         $created_file_name = FileHelper::uploadFile($video_file, 'assets/files/videos', false);
 
                         if ($created_file_name) {
-                            ItemFile::create([
+                            VideoFile::create([
                                 'file_name' => $created_file_name,
                                 'file_type' => $video_file->getClientMimeType(),
                                 'video_id' => $created_video->id,
@@ -223,15 +220,12 @@ class VideoController extends Controller implements HasMiddleware
             'editData' => $video->loadCount('category')->load('images', 'files'),
             'readOnly' => true,
             'fileTypes' => Type::where('group_code', 'video-file-type-group')
-                ->orderBy('order_index')
+                ->orderBy(column: 'order_index')
                 ->orderBy('name')
                 ->get(),
             'categories' => VideoCategory::orderBy('order_index')
                 ->orderBy('name')
                 ->get(),
-            'languages' => Language::orderBy('order_index')->orderBy('name')->get(),
-            'publishers' => User::orderBy('name')->role('Publisher')->get(),
-            'authors' => User::orderBy('name')->role('Author')->get(),
         ]);
     }
 
@@ -249,9 +243,6 @@ class VideoController extends Controller implements HasMiddleware
             'categories' => VideoCategory::orderBy('order_index')
                 ->orderBy('name')
                 ->get(),
-            'languages' => Language::orderBy('order_index')->orderBy('name')->get(),
-            'publishers' => User::orderBy('name')->role('Publisher')->get(),
-            'authors' => User::orderBy('name')->role('Author')->get(),
         ]);
     }
 
@@ -260,7 +251,6 @@ class VideoController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Video $video)
     {
-        // dd($request->all());
         $validated = $request->validate([
             'category_code' => 'nullable|string|max:255|exists:video_categories,code',
             'file_type_code' => 'nullable|string|max:255|exists:types,code',
@@ -319,11 +309,6 @@ class VideoController extends Controller implements HasMiddleware
             $video_files = $request->file('files');
             unset($validated['files']);
 
-            // Extract author IDs from array of {value, label} objects
-
-
-            // dd($authorIds);
-
             // Remove from validated before updating the item
 
             // Update
@@ -350,7 +335,7 @@ class VideoController extends Controller implements HasMiddleware
                         $created_file_name = FileHelper::uploadFile($video_file, 'assets/files/videos', false);
 
                         if ($created_file_name) {
-                            ItemFile::create([
+                            VideoFile::create([
                                 'file_name' => $created_file_name,
                                 'file_type' => $video_file->getClientMimeType(),
                                 'video_id' => $video->id,

@@ -35,7 +35,6 @@ class Video extends Model
     {
         return $this->hasMany(VideoFile::class, 'video_id', 'id');
     }
-
     // Scope
     public function scopePublished($query)
     {

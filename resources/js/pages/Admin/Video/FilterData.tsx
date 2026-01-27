@@ -10,15 +10,12 @@ import { useState } from 'react';
 
 const FilterData = () => {
     const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
-    const { fileTypes, categories, languages, authors, publishers } = usePage<any>().props;
+    const { fileTypes, categories} = usePage<any>().props;
 
     const initialQueryParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
     const [filters, setFilters] = useState({
         file_type_code: initialQueryParams.get('file_type_code') || '',
         category_code: initialQueryParams.get('category_code') || '',
-        language_code: initialQueryParams.get('language_code') || '',
-        author_id: initialQueryParams.get('author_id') || '',
-        publisher_id: initialQueryParams.get('publisher_id') || '',
         status: initialQueryParams.get('status') || '',
         trashed: initialQueryParams.get('trashed') || '',
     });
@@ -36,9 +33,6 @@ const FilterData = () => {
 
         f.file_type_code ? queryParams.set('file_type_code', f.file_type_code) : queryParams.delete('file_type_code');
         f.category_code ? queryParams.set('category_code', f.category_code) : queryParams.delete('category_code');
-        f.language_code ? queryParams.set('language_code', f.language_code) : queryParams.delete('language_code');
-        f.author_id ? queryParams.set('author_id', f.author_id) : queryParams.delete('author_id');
-        f.publisher_id ? queryParams.set('publisher_id', f.publisher_id) : queryParams.delete('publisher_id');
         f.status ? queryParams.set('status', f.status) : queryParams.delete('status');
         f.trashed ? queryParams.set('trashed', f.trashed) : queryParams.delete('trashed');
         queryParams.set('page', '1');
@@ -47,7 +41,7 @@ const FilterData = () => {
     };
 
     const resetFilter = () =>
-        updateFilters({ file_type_code: '', category_code: '', language_code: '', author_id: '', publisher_id: '', status: '', trashed: '' });
+        updateFilters({ file_type_code: '', category_code: '', status: '', trashed: '' });
 
     const { t, currentLocale } = useTranslation();
 
@@ -74,57 +68,6 @@ const FilterData = () => {
                     onChange={(val) => updateFilters({ category_code: val })}
                     placeholder="Select Category..."
                     searchPlaceholder="Search Category..."
-                    className="mt-1"
-                />
-            </div>
-            <div className="mb-4">
-                <FormLabel label="Author" />
-                <ComboboxSelect
-                    options={[
-                        { value: '', label: t('All') },
-                        ...authors.map((item: any) => ({
-                            value: item.id?.toString(),
-                            label: `${currentLocale === 'kh' ? item.name_kh || item.name : item.name} (${item.author_items_count})`,
-                        })),
-                    ]}
-                    value={filters.author_id?.toString()}
-                    onChange={(val) => updateFilters({ author_id: val })}
-                    placeholder="Select Author..."
-                    searchPlaceholder="Search Author..."
-                    className="mt-1"
-                />
-            </div>
-            <div className="mb-4">
-                <FormLabel label="Publisher" />
-                <ComboboxSelect
-                    options={[
-                        { value: '', label: t('All') },
-                        ...publishers.map((item: any) => ({
-                            value: item.id?.toString(),
-                            label: `${currentLocale === 'kh' ? item.name_kh || item.name : item.name} (${item.publisher_items_count})`,
-                        })),
-                    ]}
-                    value={filters.publisher_id?.toString()}
-                    onChange={(val) => updateFilters({ publisher_id: val })}
-                    placeholder="Select Publisher..."
-                    searchPlaceholder="Search Publisher..."
-                    className="mt-1"
-                />
-            </div>
-            <div className="mb-4">
-                <FormLabel label="Language" />
-                <ComboboxSelect
-                    options={[
-                        { value: '', label: t('All') },
-                        ...languages.map((item: any) => ({
-                            value: item.code,
-                            label: `${currentLocale === 'kh' ? item.name_kh || item.name : item.name} (${item.items_count})`,
-                        })),
-                    ]}
-                    value={filters.language_code}
-                    onChange={(val) => updateFilters({ language_code: val })}
-                    placeholder="Select Language..."
-                    searchPlaceholder="Search Language..."
                     className="mt-1"
                 />
             </div>

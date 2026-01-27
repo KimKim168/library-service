@@ -126,12 +126,7 @@ const mainNavItems: {
             },
         ],
     },
-    {
-        title: 'Website Info',
-        url: '/admin/website-infos',
-        icon: Globe,
-        permission: 'website_info view',
-    },
+    
     {
         title: 'Libraries',
         url: '/admin/libraries',
@@ -143,6 +138,12 @@ const mainNavItems: {
         url: '/admin/pages',
         icon: LayoutList,
         permission: 'page view',
+    },
+    {
+        title: 'Website Info',
+        url: '/admin/website-infos',
+        icon: Globe,
+        permission: 'website_info view',
     },
     {
         title: 'Links',

@@ -1,4 +1,5 @@
-import HeroVideo from '@/components/LibraryService/HeroVideo';
+import VideoFilePlayer from '@/components/LibraryService/VideoFilePlayer';
+import YouTubeEmbed from '@/components/LibraryService/YouTubeEmbed';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Link, usePage } from '@inertiajs/react';
 import { Calendar, Clock, Eye, VideoIcon } from 'lucide-react';
@@ -28,10 +29,7 @@ const timeAgo = (dateString: string) => {
 };
 
 const getMonthName = (monthNumber: number | string) => {
-    const months = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-    ];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     // monthNumber may come as string, convert to number and subtract 1 for index
     const index = Number(monthNumber) - 1;
     return months[index] || '';
@@ -40,9 +38,10 @@ const getMonthName = (monthNumber: number | string) => {
 const Video = () => {
     const { showVideoData, relatedVideoData } = usePage<any>().props;
     const mainVideo = showVideoData;
-
+    console.log('file_type_code:', mainVideo?.file_type_code);
+    console.log('files:', mainVideo?.files);
     // Filter out the current video from related videos
-    const filteredRelatedVideos = relatedVideoData?.filter((v: any) => v.id !== mainVideo?.id);
+    // const filteredRelatedVideos = relatedVideoData?.filter((v: any) => v.id !== mainVideo?.id);
 
     return (
         <LibraryServiceLayout>
@@ -75,14 +74,19 @@ const Video = () => {
                         <div className="items-start lg:grid lg:grid-cols-3 lg:gap-8">
                             {/* Main Video Area */}
                             <div className="mb-8 lg:col-span-2 lg:mb-0">
-                                <div className="mb-6 aspect-video w-full overflow-hidden rounded-xl">
-                                    <HeroVideo
-                                        thumbnail={mainVideo?.thumbnail ? `/assets/images/videos/${mainVideo?.thumbnail}` : ''}
-                                        videoUrl={mainVideo?.external_link || ''}
+                                {mainVideo?.file_type_code === 'video-file' && (
+                                    <VideoFilePlayer
+                                        src={
+                                            mainVideo?.files?.[0]?.file_name ? `/assets/files/videos/${mainVideo.files[0].file_name}` : '' // empty string, nothing to play
+                                        }
                                     />
-                                </div>
+                                )}
 
-                                <h1 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">{mainVideo?.name}</h1>
+                                {mainVideo?.file_type_code === 'video-youtube-url' && mainVideo?.external_link && (
+                                    <YouTubeEmbed url={mainVideo.external_link} />
+                                )}
+
+                                <h1 className="my-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">{mainVideo?.name}</h1>
 
                                 <div className="mb-4 flex flex-wrap items-center gap-4 text-sm text-gray-600">
                                     {mainVideo?.minute && (
@@ -94,13 +98,16 @@ const Video = () => {
                                         <Eye className="w-5 text-primary" /> <p>{mainVideo?.total_view_count}</p> views
                                     </div>
                                     <span className="flex items-center gap-2">
-                                        <Calendar className="w-5 text-primary" /> Published: <p>{mainVideo?.published_day}-{getMonthName(mainVideo?.published_month)}-{mainVideo?.published_year}</p>
+                                        <Calendar className="w-5 text-primary" /> Published:{' '}
+                                        <p>
+                                            {mainVideo?.published_day}-{getMonthName(mainVideo?.published_month)}-{mainVideo?.published_year}
+                                        </p>
                                     </span>
                                 </div>
 
                                 {/* Video Description */}
-                                <div className="bg-gray-50 rounded-xl p-6 mb-6">
-                                    <h2 className="text-xl font-bold text-gray-900 mb-3">Description</h2>
+                                <div className="mb-6 rounded-xl bg-gray-50 p-6">
+                                    <h2 className="mb-3 text-xl font-bold text-gray-900">Description</h2>
                                     <div dangerouslySetInnerHTML={{ __html: mainVideo?.long_description }} />
                                 </div>
                             </div>
@@ -110,17 +117,17 @@ const Video = () => {
                                 <div className="rounded-xl border lg:sticky lg:top-32">
                                     <div className="rounded-t-xl bg-[linear-gradient(138deg,#4f46e5,#6154e8,#7361ec,#846fef,#967df2,#a88af5,#ba98f9,#cba5fc,#ddb3ff)] px-4 py-6 text-white">
                                         <p>Related Videos</p>
-                                        <div className='flex items-center gap-2'>
-                                            <VideoIcon className='w-4'/>
-                                            <p className='text-sm'>{filteredRelatedVideos?.length} videos</p>
+                                        <div className="flex items-center gap-2">
+                                            <VideoIcon className="w-4" />
+                                            <p className="text-sm">{relatedVideoData?.length} videos</p>
                                         </div>
                                     </div>
-                                    <div className="mt-4 max-h-[337px] space-y-4 overflow-y-auto px-4 pb-4">
-                                        {filteredRelatedVideos?.map((video: any) => (
+                                    <div className="mt-4 max-h-[337px] overflow-y-auto">
+                                        {relatedVideoData?.map((video: any) => (
                                             <Link
                                                 key={video.id}
                                                 href={`/videos/${video.id}`}
-                                                className="group flex cursor-pointer gap-3"
+                                                className={`group flex cursor-pointer gap-3 px-4 py-2 ${showVideoData.id == video.id ? 'bg-primary/10 text-indigo-600' : 'text-gray-900'}`}
                                             >
                                                 <div className="aspect-video w-32 flex-shrink-0 overflow-hidden rounded bg-gradient-to-br from-indigo-100 to-purple-100">
                                                     <img
@@ -129,8 +136,9 @@ const Video = () => {
                                                         className="h-full w-full object-cover"
                                                     />
                                                 </div>
+
                                                 <div className="min-w-0 flex-1">
-                                                    <h3 className="line-clamp-2 text-sm font-medium text-gray-900 transition-colors group-hover:text-indigo-600">
+                                                    <h3 className="line-clamp-2 text-sm font-medium  transition-colors group-hover:text-indigo-600">
                                                         {video.name}
                                                     </h3>
                                                     {video.category_code && (

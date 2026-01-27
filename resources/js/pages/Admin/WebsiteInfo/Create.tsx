@@ -166,16 +166,17 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             value={data.short_description_kh}
                             onChange={(val) => setData('short_description_kh', val)}
                             error={errors.short_description_kh}
+                            containerClassName="col-span-2"
                         />
 
-                        <FormFieldTextArea
+                        {/* <FormFieldTextArea
                             id="address_kh"
                             name="address_kh"
                             label="Address Khmer"
                             value={data.address_kh}
                             onChange={(val) => setData('address_kh', val)}
                             error={errors.address_kh}
-                        />
+                        /> */}
 
                         <FormField
                             id="keywords_kh"
@@ -234,16 +235,17 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             value={data.short_description}
                             onChange={(val) => setData('short_description', val)}
                             error={errors.short_description}
+                            containerClassName="col-span-2"
                         />
 
-                        <FormFieldTextArea
+                        {/* <FormFieldTextArea
                             id="address"
                             name="address"
                             label="Address"
                             value={data.address}
                             onChange={(val) => setData('address', val)}
                             error={errors.address}
-                        />
+                        /> */}
 
                         <FormField
                             id="keywords"
@@ -255,7 +257,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             containerClassName="col-span-2"
                         />
 
-                        <FormField
+                        {/*<FormField
                             id="phone"
                             name="phone"
                             label="Phone"
@@ -273,7 +275,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             error={errors.email}
                         />
 
-                        {/* <FormField
+                         <FormField
                             id="working_hours"
                             name="working_hours"
                             label="Working Hours"
@@ -289,17 +291,8 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             value={data.working_days}
                             onChange={(val) => setData('working_days', val)}
                             error={errors.working_days}
-                        /> */}
-
-                        <FormField
-                            id="copyright"
-                            name="copyright"
-                            label="Copyright"
-                            value={data.copyright}
-                            onChange={(val) => setData('copyright', val)}
-                            error={errors.copyright}
-                        />
-
+                        /> 
+                        
                         <div className="md:col-span-2">
                             <FormField
                                 id="google_map_embed"
@@ -310,6 +303,18 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 error={errors.google_map_embed}
                             />
                         </div>
+                        */}
+
+                        <FormField
+                            id="copyright"
+                            name="copyright"
+                            label="Copyright"
+                            value={data.copyright}
+                            onChange={(val) => setData('copyright', val)}
+                            error={errors.copyright}
+                        />
+
+                        
 
                         <div className='col-span-2'>
                             <FormFileUpload key={editData?.logo} id="logo" label="Logo" files={files} setFiles={setFiles}/>

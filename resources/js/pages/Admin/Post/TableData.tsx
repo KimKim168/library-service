@@ -26,7 +26,7 @@ const TableData = () => {
                             <TableHeadWithSort field="title" label="Title" />
                             <TableHeadWithSort field="title_kh" label="Title Khmer" />
                             <TableHeadWithSort field="category_code" label="Category Code" />
-                            <TableHeadWithSort field="type_code" label="Type" />
+                            {/* <TableHeadWithSort field="type_code" label="Type" /> */}
                             <TableHeadWithSort field="status" label="Status" />
                             <TableHeadWithSort field="created_at" label="Created at" />
                             <TableHeadWithSort field="created_by" label="Created by" />
@@ -68,7 +68,7 @@ const TableData = () => {
                                 <TableCellText value={item.title} />
                                 <TableCellText value={item.title_kh} />
                                 <TableCellText value={item.category_code} />
-                                <TableCellText value={item.type?.name} />
+                                {/* <TableCellText value={item.type?.name} /> */}
                                 <TableCellBadge value={item.status} className='capitalize' variant={item.status} />
                                 <TableCellDate value={item.created_at} />
                                 <TableCellText value={item.created_user?.name} />

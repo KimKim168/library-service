@@ -152,7 +152,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             onChange={(val) => setData('short_description_kh', val)}
                             error={errors.short_description_kh}
                             containerClassName="col-span-2"
-                        /> */}
+                        /> 
 
                         <FormField
                             id="button_title_kh"
@@ -162,11 +162,13 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             onChange={(val) => setData('button_title_kh', val)}
                             error={errors.button_title_kh}
                         />
+                        
 
                         <div className="col-span-2 grid content-start gap-2">
                             <FormLabel label="Long Description Khmer" />
                             <MyCkeditor5 data={data.long_description_kh || ''} setData={(val: any) => setData('long_description_kh', val)} />
                         </div>
+                        */}
                     </div>
                 ) : (
                     <div className="form-field-container">
@@ -205,7 +207,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             containerClassName="col-span-2"
                         /> */}
 
-                        {parents?.length > 0 && (
+                        {/* {parents?.length > 0 && (
                             <FormCombobox
                                 name="parent_code"
                                 label="Parent"
@@ -224,7 +226,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 error={errors.parent_code}
                                 description="Select the parent page where this page belongs to."
                             />
-                        )}
+                        )} */}
                         <FormField
                             required
                             type="number"
@@ -251,7 +253,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             />
                         )}
 
-                        <FormField
+                        {/* <FormField
                             id="button_title"
                             name="button_title"
                             label="Button title"
@@ -271,7 +273,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                         <div className="col-span-2 grid content-start gap-2">
                             <FormLabel label="Long Description" />
                             <MyCkeditor5 data={data.long_description || ''} setData={(val: any) => setData('long_description', val)} />
-                        </div>
+                        </div> */}
 
                         <div className="col-span-2">
                             <Tabs defaultValue="icon" className="w-full rounded-lg bg-muted/80 p-4">
