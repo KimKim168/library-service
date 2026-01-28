@@ -10,10 +10,10 @@ Route::get('/videos/{id}', [LibraryServiceFrontPageController::class, 'video']);
 Route::get('/detail/{id}', [LibraryServiceFrontPageController::class, 'show']);
 
 
-Route::get('/banalai_register', function () {
-    return Inertia::render('Banalai/Register');
-});
+// Route::get('/banalai_register', function () {
+//     return Inertia::render('Banalai/Register');
+// });
 
-Route::get('/banalai_login', function () {
-    return Inertia::render('Banalai/BanalaiLogin');
-});
+// Route::get('/banalai_login', function () {
+//     return Inertia::render('Banalai/BanalaiLogin');
+// });

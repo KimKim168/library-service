@@ -4,8 +4,9 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Link, usePage } from '@inertiajs/react';
 import { Calendar, Clock, Eye, VideoIcon } from 'lucide-react';
 import LibraryServiceLayout from './LibraryServiceLayout';
+import useTranslation from '@/hooks/use-translation';
 
-const timeAgo = (dateString: string) => {
+const timeAgo = (dateString: string, locale: string) => {
     const now = new Date();
     const past = new Date(dateString);
     const diffMs = now.getTime() - past.getTime();
@@ -18,6 +19,28 @@ const timeAgo = (dateString: string) => {
     const months = Math.floor(days / 30);
     const years = Math.floor(days / 365);
 
+    
+    const kh = {
+        year: 'ឆ្នាំ',
+        month: 'ខែ',
+        week: 'សប្តាហ៍',
+        day: 'ថ្ងៃ',
+        hour: 'ម៉ោង',
+        minute: 'នាទី',
+        ago: 'មុន',
+        now: 'ទើបតែ',
+    };
+
+    if (locale === 'kh') {
+        if (years > 0) return `${years} ${kh.year} ${kh.ago}`;
+        if (months > 0) return `${months} ${kh.month} ${kh.ago}`;
+        if (weeks > 0) return `${weeks} ${kh.week} ${kh.ago}`;
+        if (days > 0) return `${days} ${kh.day} ${kh.ago}`;
+        if (hours > 0) return `${hours} ${kh.hour} ${kh.ago}`;
+        if (minutes > 0) return `${minutes} ${kh.minute} ${kh.ago}`;
+        return kh.now;
+    }
+
     if (years > 0) return `${years} year${years > 1 ? 's' : ''} ago`;
     if (months > 0) return `${months} month${months > 1 ? 's' : ''} ago`;
     if (weeks > 0) return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
@@ -28,44 +51,56 @@ const timeAgo = (dateString: string) => {
     return 'Just now';
 };
 
-const getMonthName = (monthNumber: number | string) => {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    // monthNumber may come as string, convert to number and subtract 1 for index
-    const index = Number(monthNumber) - 1;
-    return months[index] || '';
+const getMonthName = (month: number | string, locale: string) => {
+     const en = [
+        'January','February','March','April','May','June',
+        'July','August','September','October','November','December',
+    ];
+    const kh = [
+        'មករា','កុម្ភៈ','មីនា','មេសា','ឧសភា','មិថុនា',
+        'កក្កដា','សីហា','កញ្ញា','តុលា','វិច្ឆិកា','ធ្នូ',
+    ];
+    const index = Number(month) - 1;
+    return locale === 'kh' ? kh[index] : en[index];
 };
 
 const Video = () => {
     const { showVideoData, relatedVideoData } = usePage<any>().props;
+    const { t, currentLocale } = useTranslation();
     const mainVideo = showVideoData;
-    console.log('file_type_code:', mainVideo?.file_type_code);
-    console.log('files:', mainVideo?.files);
-    // Filter out the current video from related videos
-    // const filteredRelatedVideos = relatedVideoData?.filter((v: any) => v.id !== mainVideo?.id);
+
+    const title =
+        currentLocale === 'kh'
+            ? mainVideo?.name_kh || mainVideo?.name
+            : mainVideo?.name;
+
+    const description =
+        currentLocale === 'kh'
+            ? mainVideo?.long_description_kh || mainVideo?.long_description
+            : mainVideo?.long_description;
 
     return (
         <LibraryServiceLayout>
             <section className="pt-20 pb-8">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="mx-auto max-w-7xl">
+                <div className="section-container">
                         {/* Breadcrumb */}
                         <div className="mb-4">
                             <Breadcrumb className="inline-block rounded-2xl p-1 backdrop-blur dark:bg-slate-800/60">
                                 <BreadcrumbList>
                                     <BreadcrumbItem>
                                         <BreadcrumbLink asChild>
-                                            <Link href="/#video">Back to videos</Link>
+                                            <Link href="/#video">  {t('Back to videos')}</Link>
                                         </BreadcrumbLink>
                                     </BreadcrumbItem>
                                     <BreadcrumbSeparator />
                                     <BreadcrumbItem>
                                         <BreadcrumbLink asChild>
-                                            <Link href="/how_to">Categories</Link>
+                                            <Link href="/how_to"> {t('Categories')}</Link>
                                         </BreadcrumbLink>
                                     </BreadcrumbItem>
                                     <BreadcrumbSeparator />
                                     <BreadcrumbItem className="rounded-xl bg-[linear-gradient(138deg,#4f46e5,#6154e8,#7361ec,#846fef,#967df2,#a88af5,#ba98f9,#cba5fc,#ddb3ff)] px-4 py-2 transition-colors">
-                                        <BreadcrumbPage className="text-sm font-medium text-white">{mainVideo?.name}</BreadcrumbPage>
+                                        <BreadcrumbPage className="text-sm font-medium text-white"> {title}</BreadcrumbPage>
                                     </BreadcrumbItem>
                                 </BreadcrumbList>
                             </Breadcrumb>
@@ -86,7 +121,7 @@ const Video = () => {
                                     <YouTubeEmbed url={mainVideo.external_link} />
                                 )}
 
-                                <h1 className="my-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">{mainVideo?.name}</h1>
+                                <h1 className="my-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl"> {title}</h1>
 
                                 <div className="mb-4 flex flex-wrap items-center gap-4 text-sm text-gray-600">
                                     {mainVideo?.minute && (
@@ -95,7 +130,7 @@ const Video = () => {
                                         </div>
                                     )}
                                     <div className="flex items-center gap-2">
-                                        <Eye className="w-5 text-primary" /> <p>{mainVideo?.total_view_count}</p> views
+                                        <Eye className="w-5 text-primary" /> <p>{mainVideo?.total_view_count}</p> {t('views')}
                                     </div>
                                     <span className="flex items-center gap-2">
                                         <Calendar className="w-5 text-primary" /> Published:{' '}
@@ -107,8 +142,8 @@ const Video = () => {
 
                                 {/* Video Description */}
                                 <div className="mb-6 rounded-xl bg-gray-50 p-6">
-                                    <h2 className="mb-3 text-xl font-bold text-gray-900">Description</h2>
-                                    <div dangerouslySetInnerHTML={{ __html: mainVideo?.long_description }} />
+                                    <h2 className="mb-3 text-xl font-bold text-gray-900"> {t('Description')}</h2>
+                                    <div dangerouslySetInnerHTML={{ __html: description }} />
                                 </div>
                             </div>
 
@@ -116,48 +151,60 @@ const Video = () => {
                             <div className="lg:col-span-1">
                                 <div className="rounded-xl border lg:sticky lg:top-32">
                                     <div className="rounded-t-xl bg-[linear-gradient(138deg,#4f46e5,#6154e8,#7361ec,#846fef,#967df2,#a88af5,#ba98f9,#cba5fc,#ddb3ff)] px-4 py-6 text-white">
-                                        <p>Related Videos</p>
+                                        <p>{t('Related Videos')}</p>
                                         <div className="flex items-center gap-2">
                                             <VideoIcon className="w-4" />
-                                            <p className="text-sm">{relatedVideoData?.length} videos</p>
+                                            <p className="text-sm">{relatedVideoData?.length}  {t('videos')}</p>
                                         </div>
                                     </div>
                                     <div className="mt-4 max-h-[337px] overflow-y-auto">
-                                        {relatedVideoData?.map((video: any) => (
-                                            <Link
-                                                key={video.id}
-                                                href={`/videos/${video.id}`}
-                                                className={`group flex cursor-pointer gap-3 px-4 py-2 ${showVideoData.id == video.id ? 'bg-primary/10 text-indigo-600 ' : 'text-gray-900'}`}
-                                            >
-                                                <div className="aspect-video w-32 flex-shrink-0 overflow-hidden rounded bg-gradient-to-br from-indigo-100 to-purple-100">
-                                                    <img
-                                                        src={video.thumbnail ? `/assets/images/videos/${video.thumbnail}` : ''}
-                                                        alt={video.name}
-                                                        className="h-full w-full object-cover"
-                                                    />
-                                                </div>
+                                         {relatedVideoData?.map((video: any) => {
+                                            const videoTitle =
+                                                currentLocale === 'kh'
+                                                    ? video?.name_kh ||
+                                                      video?.name
+                                                    : video?.name;
 
-                                                <div className="min-w-0 flex-1">
-                                                    <h3 className="line-clamp-2 text-sm font-medium  transition-colors group-hover:text-indigo-600">
-                                                        {video.name}
-                                                    </h3>
-                                                    {video.category_code && (
-                                                        <p className="mt-1 mb-0.5 text-xs text-gray-600">{video.category_code}</p>
-                                                    )}
-                                                    <div className="mt-1 flex items-center gap-1 text-xs text-gray-600">
-                                                        <span>{video.total_view_count} views</span>
-                                                        <span>•</span>
-                                                        <span>{timeAgo(video.created_at)}</span>
+                                            return (
+                                                <Link
+                                                    key={video.id}
+                                                    href={`/videos/${video.id}`}
+                                                    className={`group flex gap-3 px-4 py-2 ${
+                                                        mainVideo.id === video.id
+                                                            ? 'bg-primary/10 text-indigo-600'
+                                                            : ''
+                                                    }`}
+                                                >
+                                                    <div className="aspect-video w-32 overflow-hidden rounded">
+                                                        <img
+                                                            src={`/assets/images/videos/${video.thumbnail}`}
+                                                            alt={videoTitle}
+                                                            className="h-full w-full object-cover"
+                                                        />
                                                     </div>
-                                                </div>
-                                            </Link>
-                                        ))}
+
+                                                    <div className="flex-1">
+                                                        <h3 className="line-clamp-2 text-sm font-medium group-hover:text-indigo-600">
+                                                            {videoTitle}
+                                                        </h3>
+
+                                                        <div className="mt-1 text-xs text-gray-600">
+                                                            {video.total_view_count}{' '}
+                                                            {t('views')} •{' '}
+                                                            {timeAgo(
+                                                                video.created_at,
+                                                                currentLocale
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
         </LibraryServiceLayout>
     );
