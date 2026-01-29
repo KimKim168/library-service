@@ -53,7 +53,7 @@ const Detail = () => {
                 <div className="flex flex-col gap-12 lg:flex-row">
                     {/* Content */}
                     <article className="w-full lg:w-3/4">
-                        <h1 className="mb-4 text-3xl font-bold text-gray-900">
+                        <h1 className="mb-4 text-2xl font-bold leading-tight text-gray-900 lg:text-[28px]">
                             {title}
                         </h1>
 
