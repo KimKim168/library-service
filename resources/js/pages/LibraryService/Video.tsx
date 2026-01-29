@@ -108,7 +108,7 @@ const Video = () => {
                                 <YouTubeEmbed url={mainVideo.external_link} />
                             )}
 
-                            <h1 className="my-4 text-2xl font-bold leading-tight text-gray-900 lg:text-[28px]"> {title}</h1>
+                            <h1 className="my-4 text-2xl leading-tight font-bold text-gray-900 lg:text-[28px]"> {title}</h1>
 
                             <div className="mb-4 flex flex-wrap items-center gap-4 text-sm text-gray-600">
                                 {mainVideo?.minute && (
@@ -152,7 +152,7 @@ const Video = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="mt-4 max-h-[337px] overflow-y-auto">
+                                <div className="my-2 max-h-[372px] overflow-y-auto">
                                     {relatedVideoData?.map((video: any, index: number) => {
                                         const videoTitle = currentLocale === 'kh' ? video?.name_kh || video?.name : video?.name;
 
@@ -164,7 +164,7 @@ const Video = () => {
                                                 href={`/videos/${video.id}`}
                                                 className={`group flex gap-3 px-4 py-2 ${
                                                     mainVideo.id === video.id ? 'bg-primary/10 text-indigo-600' : ''
-                                                } ${isLastVideo ? 'rounded-b-xl' : ''}`}
+                                                } ${isLastVideo ? '' : ''}`}
                                             >
                                                 <div className="aspect-video w-32 overflow-hidden rounded">
                                                     <img
