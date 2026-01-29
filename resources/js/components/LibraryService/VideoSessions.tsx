@@ -9,7 +9,7 @@ const VideoSessions = () => {
 
     return (
         <section id="video" className="section-container">
-            <h2 className="mb-6 text-center text-3xl font-bold text-gray-900 sm:text-4xl">{headerTitle}</h2>
+            <h2 className="mb-6 text-center text-2xl font-bold leading-tight text-gray-900 lg:text-3xl">{headerTitle}</h2>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {allVideos?.map((video, index) => {

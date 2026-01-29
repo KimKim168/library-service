@@ -24,10 +24,10 @@ const Hero = () => {
 
     return (
         <section className="section-container pt-24 pb-10">
-            <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="grid gap-8 lg:gap-12 lg:grid-cols-2">
                 {/* Left Section */}
                 <div>
-                    <h1 className="mb-6 text-4xl font-bold leading-tight text-gray-900 sm:text-5xl lg:text-6xl max-w-lg">
+                    <h1 className="mb-2 lg:mb-2 text-2xl font-bold leading-tight text-gray-900 lg:text-3xl max-w-lg">
                         {title}{' '}
                         <span className="text-purple-600">
                             {shortDescription}
@@ -35,13 +35,13 @@ const Hero = () => {
                     </h1>
 
                     <p
-                        className="mb-8 max-w-xl text-lg leading-relaxed text-gray-600 sm:text-xl"
+                        className="mb-2 lg:mb-8 max-w-xl text-lg leading-relaxed text-gray-600 sm:text-xl"
                         dangerouslySetInnerHTML={{ __html: longDescription }}
                     />
 
-                    <div className="mb-10 flex flex-wrap gap-4">
-                        <Link href={`/how_to`} className="transform rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl">
-                            {t('Explore Courses')}
+                    <div className=" flex flex-wrap gap-4">
+                        <Link href={`/how_to`} className="transform rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 lg:px-8 lg:py-4 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl">
+                            {t('Explore Tutorial')}
                         </Link>
                     </div>
                 </div>

@@ -29,16 +29,16 @@ const BuddhistCardHoverGradient = ({ item }: { item?: any }) => {
 
                         <div className="flex h-full flex-1 flex-col justify-between">
                             <div className="card__text">
-                                <p className="card__title line-clamp-2 pb-1 text-lg font-medium">
+                                <p className="card__title line-clamp-2 pb-1 font-medium">
                                     {currentLocale === 'kh' ? item?.name_kh || item?.name : item?.name}
                                 </p>
-                                <div
+                                {/* <div
                                     className="line-clamp-3 text-base text-gray-600"
                                     dangerouslySetInnerHTML={{
                                         __html:
                                             currentLocale === 'kh' ? item?.short_description_kh || item?.short_description : item?.short_description,
                                     }}
-                                />
+                                /> */}
                             </div>
                         </div>
 
@@ -84,7 +84,7 @@ const StyledWrapper = styled.div`
     }
 
     .card__content {
-        padding: 1.25em;
+        padding: 1em;
         height: 100%;
         display: flex;
         flex-direction: column;

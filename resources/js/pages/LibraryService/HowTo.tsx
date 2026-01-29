@@ -22,7 +22,7 @@ const HowTo = () => {
             <div className="mx-auto mt-26 section-container">
                 {/* Header */}
                 <div className="mb-4">
-                    <h2 className="text-start text-3xl font-bold text-gray-900 sm:text-4xl">
+                    <h2 className="text-start text-2xl font-bold leading-tight text-gray-900 lg:text-3xl">
                         {headerTitle}
                     </h2>
 
@@ -46,13 +46,13 @@ const HowTo = () => {
                             >
                                 {/* Section Header */}
                                 <div className="flex items-center justify-between">
-                                    <h1 className="text-xl font-bold text-primary dark:text-white">
+                                    <h1 className="text-2xl font-bold leading-tight text-primary dark:text-white">
                                         {sectionTitle}
                                     </h1>
                                 </div>
 
                                 {/* Videos Grid */}
-                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
                                     {section?.videos?.map((video: any) => (
                                         <BuddhistCardHoverGradient
                                             key={video.id}
