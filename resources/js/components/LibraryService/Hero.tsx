@@ -27,7 +27,7 @@ const Hero = () => {
             <div className="grid gap-8 lg:gap-12 lg:grid-cols-2">
                 {/* Left Section */}
                 <div>
-                    <h1 className="mb-2 lg:mb-2 text-2xl font-bold leading-tight text-gray-900 lg:text-3xl max-w-lg">
+                    <h1 className="mb-2 lg:mb-2 text-2xl font-bold leading-tight text-gray-900 lg:text-[28px] max-w-lg">
                         {title}{' '}
                         <span className="text-purple-600">
                             {shortDescription}

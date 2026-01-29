@@ -22,7 +22,7 @@ const HowTo = () => {
             <div className="mx-auto mt-26 section-container">
                 {/* Header */}
                 <div className="mb-4">
-                    <h2 className="text-start text-2xl font-bold leading-tight text-gray-900 lg:text-3xl">
+                    <h2 className="text-start text-2xl font-bold leading-tight text-gray-900 lg:text-[28px]">
                         {headerTitle}
                     </h2>
 

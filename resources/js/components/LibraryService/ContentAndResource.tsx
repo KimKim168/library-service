@@ -13,7 +13,7 @@ const ContentAndResource = () => {
 
     return (
         <section id="resources" className="section-container bg-white py-14">
-            <h2 className="mb-6 text-center text-2xl font-bold leading-tight text-gray-900 lg:text-3xl">
+            <h2 className="mb-6 text-center text-2xl font-bold leading-tight text-gray-900 lg:text-[28px]">
                 {headerTitle}
             </h2>
 

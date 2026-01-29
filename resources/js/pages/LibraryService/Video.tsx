@@ -108,7 +108,7 @@ const Video = () => {
                                 <YouTubeEmbed url={mainVideo.external_link} />
                             )}
 
-                            <h1 className="my-4 text-2xl font-bold leading-tight text-gray-900 lg:text-3xl"> {title}</h1>
+                            <h1 className="my-4 text-2xl font-bold leading-tight text-gray-900 lg:text-[28px]"> {title}</h1>
 
                             <div className="mb-4 flex flex-wrap items-center gap-4 text-sm text-gray-600">
                                 {mainVideo?.minute && (
