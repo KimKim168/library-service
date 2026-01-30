@@ -26,7 +26,7 @@ export default function YouTubeEmbed({ url }) {
     if (!embedUrl) return null;
 
     return (
-        <div className="relative h-0 overflow-hidden rounded-lg bg-black pb-[56.25%] shadow-lg">
+        <div className="relative h-0 overflow-hidden rounded-xl bg-black pb-[56.25%] shadow-lg">
             <iframe
                 className="absolute inset-0 h-full w-full"
                 src={embedUrl}

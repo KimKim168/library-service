@@ -196,7 +196,7 @@ const Video = () => {
                                     </div>
                                 </div>
 
-                                <div className="max-h-[390px] overflow-y-auto pb-2">
+                                <div className="max-h-[388px] overflow-y-auto pb-2">
                                     {relatedVideoData?.map((video: any) => {
                                         const isActive =
                                             mainVideo.id === video.id;
