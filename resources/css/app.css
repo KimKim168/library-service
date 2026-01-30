@@ -26,37 +26,37 @@
 }
 
 @font-face {
-    font-family: 'ManropeRegular';
+    font-family: 'Manrope';
     src: url('/assets/fonts/SesorFonts/MainFonts/Manrope-Regular.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'ManropeLight';
+    font-family: 'Manrope';
     src: url('/assets/fonts/SesorFonts/MainFonts/Manrope-Light.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'ManropeBold';
+    font-family: 'Manrope';
     src: url('/assets/fonts/SesorFonts/MainFonts/Manrope-Bold.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'ManropeMedium';
+    font-family: 'Manrope';
     src: url('/assets/fonts/SesorFonts/MainFonts/Manrope-Medium.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'ManropeSemiBold';
+    font-family: 'Manrope';
     src: url('/assets/fonts/SesorFonts/MainFonts/Manrope-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'ManropeExtraLight';
+    font-family: 'Manrope';
     src: url('/assets/fonts/SesorFonts/MainFonts/Manrope-ExtraLight.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'ManropeExtraBold';
+    font-family: 'Manrope';
     src: url('/assets/fonts/SesorFonts/MainFonts/Manrope-ExtraBold.ttf') format('truetype');
 }
 
@@ -147,7 +147,7 @@
 
 @theme {
     --font-sans:
-         ui-sans-serif, system-ui, sans-serif,'Segoe UI', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+         'Manrope', 'Kantumruy',system-ui, sans-serif,'Segoe UI', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 
     /* Sesor Font */
