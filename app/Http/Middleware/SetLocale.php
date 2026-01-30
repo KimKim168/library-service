@@ -17,7 +17,7 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = Session::get('locale', 'en');
+        $locale = Session::get('locale', 'kh');
 
         App::setLocale($locale);
 

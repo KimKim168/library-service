@@ -13,7 +13,7 @@ export default function useTranslation() {
     const { locale } = usePage().props;
 
     // Set the default language as 'kh' Khmer if no locale is set
-    const currentLocale = locale || 'en'; // fallback to 'en' (English)
+    const currentLocale = locale || 'kh'; // fallback to 'en' (English)
 
     // Translate function to return the translated value for a key
     const t = (key: string): string => {

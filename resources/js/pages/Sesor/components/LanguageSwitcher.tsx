@@ -1,20 +1,21 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { usePage } from '@inertiajs/react';
 import { Globe } from 'lucide-react';
+import { router } from '@inertiajs/react';
 
 export function LanguageSwitcher() {
     const { locale } = usePage().props as { locale?: string };
 
+    const defaultLocale = locale ?? 'kh'; // Khmer default
+
     return (
         <Select
-            value={locale ?? 'kh'} // Khmer default
-            onValueChange={(val) => {
-                window.location.href = `/lang/${val}`;
-            }}
+            value={defaultLocale}
+            onValueChange={(val) => router.visit(`/lang/${val}`, { replace: true })}
         >
             <SelectTrigger className="h-9 w-[120px] border-none px-4 font-manrope-bold text-primary shadow-none">
                 <Globe className="mr-1 h-3 w-3 text-primary" />
-                <SelectValue />
+                <SelectValue placeholder={defaultLocale} />
             </SelectTrigger>
 
             <SelectContent>
