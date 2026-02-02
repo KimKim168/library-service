@@ -41,7 +41,7 @@ const LibraryServiceLayout = ({ children }: LayoutProps) => {
                         <div className="flex items-center gap-2">
                             <Link
                                 href="/how_to"
-                                className="flex items-center justify-center border-r px-4 text-xs font-medium transition-colors md:w-28 md:text-base"
+                                className="flex text-black dark:text-black items-center justify-center border-r px-4 text-xs font-medium transition-colors md:w-28 md:text-base"
                             >
                                 {t('How To')}
                             </Link>

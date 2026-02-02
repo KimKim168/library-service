@@ -13,13 +13,13 @@ export function LanguageSwitcher() {
             value={defaultLocale}
             onValueChange={(val) => router.visit(`/lang/${val}`, { replace: true })}
         >
-            <SelectTrigger className="h-9 w-[120px] border-none px-4 font-manrope-bold text-primary shadow-none">
-                <Globe className="mr-1 h-3 w-3 text-primary" />
+            <SelectTrigger className="h-9 w-[120px] border-none px-4 font-manrope-bold text-primary dark:text-primary shadow-none">
+                <Globe className="mr-1 h-3 w-3 text-primary dark:text-primary" />
                 <SelectValue placeholder={defaultLocale} />
             </SelectTrigger>
 
             <SelectContent>
-                <SelectGroup className="font-manrope-bold text-[15px] text-primary">
+                <SelectGroup className="font-manrope-bold text-[15px] text-primary dark:text-primary">
                     <SelectItem value="kh">Khmer</SelectItem>
                     <SelectItem value="en">English</SelectItem>
                 </SelectGroup>
