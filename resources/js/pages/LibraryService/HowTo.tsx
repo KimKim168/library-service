@@ -19,7 +19,7 @@ const HowTo = () => {
 
     return (
         <LibraryServiceLayout>
-            <div className="mx-auto mt-26 section-container">
+            <div className="mx-auto pt-26 section-container">
                 {/* Header */}
                 <div className="mb-4">
                     <h2 className="text-start text-2xl font-bold leading-tight text-gray-900 lg:text-[28px]">
