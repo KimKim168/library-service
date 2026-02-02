@@ -15,24 +15,31 @@ class LibraryServiceFrontPageController extends Controller
 
     public function index()
     {
+        $isLoggedIn = auth()->check();
+
         $videoHeader = Page::where('code', 'content-header-home-top')->first();
         $videoHeaderBottom = Page::where('code', 'content-header-home-bottom')->first();
+
         $heroVideo = Video::where('category_code', 'hero-video')
-            ->where('status', 'published')
+            ->when(!$isLoggedIn, function ($query) {
+                $query->where('status', 'published');
+            })
             ->with('files')
             ->first();
 
-        // All videos (published only)
-        $allVideos = Video::where('status', 'published')
+        $allVideos = Video::when(!$isLoggedIn, function ($query) {
+            $query->where('status', 'published');
+        })
             ->with('files')
             ->orderBy('id', 'desc')
             ->get();
 
-        // All resources / posts (published only)
-        $allResoures = Post::where('status', 'published')
+        $allResoures = Post::when(!$isLoggedIn, function ($query) {
+            $query->where('status', 'published');
+        })
             ->orderBy('id', 'desc')
             ->get();
-        // return ($allVideos);
+
         return Inertia::render('LibraryService/Index', [
             'videoHeader' => $videoHeader,
             'videoHeaderBottom' => $videoHeaderBottom,
@@ -41,40 +48,61 @@ class LibraryServiceFrontPageController extends Controller
             'allResoures' => $allResoures,
         ]);
     }
-    public function how_to()
-    {
-        $header = Page::where('code', 'content-header-how-to-page')->first();
 
-        $categoryWithPostsData = VideoCategory::with(['videos' => function ($query) {
-            $query->orderBy('created_at', 'desc')
-                ->select(['id', 'category_code', 'thumbnail', 'name', 'name_kh', 'short_description', 'short_description_kh']) // include FK and PK
-                ->limit(6);
-        }])
-            ->orderBy('order_index')
-            ->orderBy('name')
-            ->get();
-        // return $categoryWithPostsData;
-        return Inertia::render('LibraryService/HowTo', [
-            'header' => $header,
-            'categoryWithPostsData' => $categoryWithPostsData,
-        ]);
-    }
+  public function how_to()
+{
+    $isLoggedIn = auth()->check();
+
+    $header = Page::where('code', 'content-header-how-to-page')->first();
+
+    $categoryWithPostsData = VideoCategory::with([
+        'videos' => function ($query) use ($isLoggedIn) {
+            $query
+                ->when(!$isLoggedIn, function ($q) {
+                    $q->where('status', 'published');
+                })
+                ->orderBy('created_at', 'desc')
+                ->select([
+                    'id',
+                    'category_code',
+                    'thumbnail',
+                    'name',
+                    'name_kh',
+                    'short_description',
+                    'short_description_kh',
+                ]);
+        }
+    ])
+        ->orderBy('order_index')
+        ->orderBy('name')
+        ->get();
+
+    return Inertia::render('LibraryService/HowTo', [
+        'header' => $header,
+        'categoryWithPostsData' => $categoryWithPostsData,
+    ]);
+}
+
 
     public function video(Request $request, $id)
     {
-        $query = Video::query();
+        $isLoggedIn = auth()->check();
 
-        $showVideoData = Video::with('files')->find($id);
-
-        $relatedVideoData = (clone $query)
-            ->where('status', 'published')
+        $showVideoData = Video::when(!$isLoggedIn, function ($query) {
+            $query->where('status', 'published');
+        })
             ->with('files')
+            ->findOrFail($id);
+
+        $relatedVideoData = Video::when(!$isLoggedIn, function ($query) {
+            $query->where('status', 'published');
+        })
             ->where('category_code', $showVideoData->category_code)
+            ->with('files')
             ->get();
 
         $showVideoData->increment('total_view_count');
-        
-        // return ($showVideoData);    
+
         return Inertia::render('LibraryService/Video', [
             'showVideoData' => $showVideoData,
             'relatedVideoData' => $relatedVideoData,
@@ -82,14 +110,19 @@ class LibraryServiceFrontPageController extends Controller
     }
     public function show($id)
     {
-        $query = Post::query();
-        $showData = Post::find($id);
-        $relatedData = (clone $query)
-            ->where('status', operator: 'published')
+        $isLoggedIn = auth()->check();
+
+        $showData = Post::when(!$isLoggedIn, function ($query) {
+            $query->where('status', 'published');
+        })
+            ->findOrFail($id);
+
+        $relatedData = Post::when(!$isLoggedIn, function ($query) {
+            $query->where('status', 'published');
+        })
             ->where('category_code', $showData->category_code)
             ->get();
 
-        // return ($relatedData);
         return Inertia::render('LibraryService/Detail', [
             'showData' => $showData,
             'relatedData' => $relatedData,
