@@ -34,7 +34,7 @@ const LibraryServiceLayout = ({ children }: LayoutProps) => {
                                 className="h-14 w-auto"
                             />
                             <p className="hidden text-2xl font-bold text-indigo-600 transition-colors hover:text-indigo-700 md:block">
-                                {siteName}
+                                {currentLocale === 'kh' ? website_info?.name_kh || website_info?.name : website_info?.name}
                             </p>
                         </Link>
 
